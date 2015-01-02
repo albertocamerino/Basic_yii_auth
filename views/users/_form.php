@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => 100]) ?>
+    <?= $form->field($model, 'username')->textInput(['maxlength' => 100]) ?>
 
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => 45]) ?>
 
