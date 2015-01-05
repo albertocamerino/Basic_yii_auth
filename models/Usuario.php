@@ -6,7 +6,7 @@ use yii\db\ActiveRecord;
 use Yii;
 
 /**
- * This is the model class for table "users".
+ *  This is the model class for table "users".
  *
  * @property integer $id
  * @property string $usuario
