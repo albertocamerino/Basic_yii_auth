@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use yii\rbac\Item;
+use yii\rbac\ManagerInterface;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;

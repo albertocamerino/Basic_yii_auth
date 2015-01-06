@@ -86,9 +86,9 @@ class UsuarioController extends Controller
  		$me = !Yii::$app->user->isGuest;
  		//throw new HttpException(406, 'Não autorizado!');
  		//if ($me)
- 			throw new ForbiddenHttpException('Não autorizado!');
+ 			//throw new ForbiddenHttpException('Não autorizado!');
  			//throw new HttpException(406, 'Não autorizado!');
- 		//return $perent and $me;
+ 		return $perent and $me;
  		//return false;
 		//return $perent;
 	}
