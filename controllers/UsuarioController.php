@@ -8,6 +8,7 @@ use yii\web\Controller;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\web\HttpException;
+use yii\web\ForbiddenHttpException;
 
 class UsuarioController extends Controller
 {
@@ -81,10 +82,14 @@ class UsuarioController extends Controller
 	
 	public function beforeAction($action)
 	{
-		$perent = parent::beforeAction($action);
-		$me = !Yii::$app->user->isGuest;
-		throw new HttpException(406, 'teste');
-		return $perent and $me;
-		
+ 		$perent = parent::beforeAction($action);
+ 		$me = !Yii::$app->user->isGuest;
+ 		//throw new HttpException(406, 'Não autorizado!');
+ 		//if ($me)
+ 			throw new ForbiddenHttpException('Não autorizado!');
+ 			//throw new HttpException(406, 'Não autorizado!');
+ 		//return $perent and $me;
+ 		//return false;
+		//return $perent;
 	}
 }
