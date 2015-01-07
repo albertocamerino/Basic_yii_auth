@@ -38,3 +38,4 @@ $this->title = 'Página inicial!'.Yii::$app->user->isGuest;
     ]); ?>
     
 <?= Html::tag('teste', '<p>Teste'.$this->title.'</p>')?>
+<?= Html::tag('teste', '<p>Teste'.print_r(Yii::$app->authManager->getAssignments(Yii::$app->user->getId())).'</p>')?>

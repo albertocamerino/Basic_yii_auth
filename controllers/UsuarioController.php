@@ -9,9 +9,25 @@ use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\web\HttpException;
 use yii\web\ForbiddenHttpException;
+use yii\filters\AccessControl;
 
 class UsuarioController extends Controller
 {
+	public function behaviors()
+	{
+		return [
+				'access' => [
+					'class' => AccessControl::className(),
+					'rules' => [
+						['roles' => ['connect'],
+						 'actions' => ['index'],
+						 'allow' => true
+						],
+					],
+				]
+		];
+	}
+	
 	public function actionIndex()
 	{
 		$conteudo = new ActiveDataProvider([
@@ -80,16 +96,16 @@ class UsuarioController extends Controller
 		}
 	}
 	
-	public function beforeAction($action)
-	{
- 		$perent = parent::beforeAction($action);
- 		$me = !Yii::$app->user->isGuest;
- 		//throw new HttpException(406, 'Não autorizado!');
- 		//if ($me)
- 			//throw new ForbiddenHttpException('Não autorizado!');
- 			//throw new HttpException(406, 'Não autorizado!');
- 		return $perent and $me;
- 		//return false;
-		//return $perent;
-	}
+// 	public function beforeAction($action)
+// 	{
+//  		$perent = parent::beforeAction($action);
+//  		$me = !Yii::$app->user->isGuest;
+//  		//throw new HttpException(406, 'Não autorizado!');
+//  		//if ($me)
+//  			//throw new ForbiddenHttpException('Não autorizado!');
+//  			//throw new HttpException(406, 'Não autorizado!');
+//  		return $perent and $me;
+//  		//return false;
+// 		//return $perent;
+// 	}
 }
