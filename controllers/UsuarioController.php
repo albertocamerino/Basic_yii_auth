@@ -23,6 +23,10 @@ class UsuarioController extends Controller
 						 'actions' => ['index'],
 						 'allow' => true
 						],
+						['roles' => ['admin'],
+						'actions' => ['index','visao','create','delete','update'],
+						'allow' => true
+						],
 					],
 				]
 		];
