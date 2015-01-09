@@ -14,7 +14,7 @@ class PhoneRecord extends ActiveRecord
 	public function rules()
 	{
 		return [
-			['customer_id', number],
+			['customer_id', 'number'],
 			['number', 'string'],
 			[['customer_id', 'number'], 'required']
 		];

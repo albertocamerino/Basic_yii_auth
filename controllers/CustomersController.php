@@ -37,6 +37,11 @@ class CustomersController extends Controller
 		
 	}
 	
+	private function load(CustomerRecord $cr, PhoneRecord $pr, array $post)
+	{
+		return $cr->load($post) and $pr->load($post) and $cr->validate() and $pr->validate(['numbers']);
+	}
+	
 	private function makeCustomer(CustomerRecord $cr,
 								  PhoneRecord $pr)
 	{
@@ -52,6 +57,13 @@ class CustomersController extends Controller
 	
 	public function actionAdd()
 	{
-		$this->render('add');
+		$customer = new CustomerRecord;
+		$phone = new PhoneRecord;
+		if($this->load($customer, $phone, $_POST))
+		{
+			$this->store($this->makeCustomer($customer, $phone));
+			return $this->redirect('/customers');
+		}
+		return $this->render('add', compact('customer', 'phone'));
 	}
 }

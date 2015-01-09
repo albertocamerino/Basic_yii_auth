@@ -2,7 +2,7 @@
 
 namespace app\models\customer;
 
-class customer
+class Customer
 {
 	/** @var string */
 	public $name;
