@@ -2,19 +2,21 @@
 
 namespace app\controllers;
 
+use Yii;
 use yii\web\Controller;
 use app\models\customer\Customer;
 use app\models\customer\CustomerRecord;
 use app\models\customer\PhoneRecord;
 use app\models\customer\Phone;
+use yii\data\ArrayDataProvider;
 
 class CustomersController extends Controller
 {
 	
 	public function actionIndex()
 	{
-		$records = $this->getRecordsAccordingToQuery();
-		$this->render('index', compact($records));
+		$records = $this->findRecordsByQuery();
+		$this->render('index', compact('records'));
 	}
 	
 	private function store(Customer $customer)
@@ -65,5 +67,38 @@ class CustomersController extends Controller
 			return $this->redirect('/customers');
 		}
 		return $this->render('add', compact('customer', 'phone'));
+	}
+	
+	private function findRecordsByQuery()
+	{
+		$number = Yii::$app->request->get('phone_number');
+		$records = $this->getRecordsByPhoneNumber($number);
+		$dataprovider = $this->wrapIntoDataProvider($records);
+		return $dataprovider;
+	}
+	
+	private function wrapIntoDataProvider($data)
+	{
+		return new ArrayDataProvider([
+				'allModels' => $data,
+				'pagination' => false
+		]);
+	}
+	
+	private function getRecordsByPhoneNumber($number)
+	{
+		$pr = PhoneRecord::findOne(['number' => $number]);
+		if (!$pr)
+			return [];
+		
+		$cr = CustomerRecord::findOne($pr->customer_id);
+		if(!$cr)
+			return [];
+		return [$this->makeCustomer($cr, $pr)];
+	}
+	
+	public function actionQuery()
+	{
+		return $this->render('query');
 	}
 }
