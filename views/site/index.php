@@ -1,6 +1,11 @@
 <?php
 /* @var $this yii\web\View */
 $this->title = 'My Yii Application';
+Yii::trace("Meu trace: ", 'Minha aplicação.');
+Yii::error("Meu trace: ", 'Minha aplicação.');
+Yii::warning("Meu trace: ", 'Minha aplicação.');
+Yii::info("Meu trace: ", 'Minha aplicação.');
+
 ?>
 <div class="site-index">
 

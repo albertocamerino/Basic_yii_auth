@@ -45,6 +45,18 @@ $config = [
         'db' => require(__DIR__ . '/db.php'),
     ],
     'params' => $params,
+	'modules' => [
+        'firstlevel' => [
+            'class' => 'app\utilities\FirstModule',
+        	'basePath' => '@app'
+        ],
+		'gii' => [
+			'class' => 'yii\gii\Module'
+		],
+		'api' => [
+			'class' => 'app\api\ApiModule'
+		]
+	],
 ];
 
 if (YII_ENV_DEV) {
@@ -52,8 +64,11 @@ if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = 'yii\debug\Module';
 
-    $config['bootstrap'][] = 'gii';
-    $config['modules']['gii'] = 'yii\gii\Module';
+    //$config['bootstrap'][] = 'gii';
+    //$config['modules']['gii'] = 'yii\gii\Module';
+    
+//     $config['bootstrap'][] = 'firstlevel';
+//     $config['modules']['firstlevel'] = 'app\utilities\FirstModule';
 }
 
 return $config;
